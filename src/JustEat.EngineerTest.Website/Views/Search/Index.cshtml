@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Search for Restaurants in your area";
+}
+
+<br/>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="input-group">
+            <input type="text" id="outcode-input" class="form-control" placeholder="Enter outpost" data-bind="value: searchInput">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" data-bind="click: searchRestaurantsByOutpost">Search</button>
+            </span>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row" data-bind="visible: hasResults">
+    <div class="col-sm-7">
+        <ul id="results" class="list-group" data-bind="foreach: Restaurants">
+            <li class="list-group-item">
+                <span class="badge" data-bind="text: RatingAverage"></span>
+                <h3 data-bind="text : Name"></h3>
+                <p data-bind="foreach: CuisineTypes">
+                    <span class="label label-primary" data-bind="text: Name"></span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/Restaurants/restaurantsResultVM.js"></script>
+    <script>
+        ko.applyBindings(new RestaurantsResultVM());
+    </script>
+}
